@@ -1,0 +1,336 @@
+{
+  "routes": [
+    {
+      "label": 21,
+      "number": 1,
+      "length": 19,
+      "demand": 3480,
+      "cycle_time": 90,
+      "fare": 0.5
+    },
+    {
+      "label": 16,
+      "number": 2,
+      "length": 22,
+      "demand": 3352,
+      "cycle_time": 120,
+      "fare": "0.5"
+    },
+    {
+      "label": 51,
+      "number": 3,
+      "length": 35,
+      "demand": 3279,
+      "cycle_time": 180,
+      "fare": 0.5
+    },
+    {
+      "label": 13,
+      "number": 4,
+      "length": 21,
+      "demand": 2955,
+      "cycle_time": 100,
+      "fare": 0.5
+    },
+    {
+      "label": 66,
+      "number": 5,
+      "length": 22,
+      "demand": 2750,
+      "cycle_time": 120,
+      "fare": 0.5
+    },
+    {
+      "label": 106,
+      "number": 6,
+      "length": 34,
+      "demand": 2705,
+      "cycle_time": 180,
+      "fare": 0.5
+    },
+    {
+      "label": 15,
+      "number": 7,
+      "length": 57,
+      "demand": 2564,
+      "cycle_time": 200,
+      "fare": 0.6
+    },
+    {
+      "label": 999,
+      "number": 8,
+      "length": 18,
+      "demand": 2211,
+      "cycle_time": 90,
+      "fare": 0.5
+    },
+    {
+      "label": 103,
+      "number": 9,
+      "length": 54,
+      "demand": 2041,
+      "cycle_time": 220,
+      "fare": 0.6
+    },
+    {
+      "label": 23,
+      "number": 10,
+      "length": 44,
+      "demand": 1992,
+      "cycle_time": 150,
+      "fare": 0.6
+    },
+    {
+      "label": 18,
+      "number": 11,
+      "length": 31,
+      "demand": 1920,
+      "cycle_time": 120,
+      "fare": 0.5
+    },
+    {
+      "label": 1022,
+      "number": 12,
+      "length": 28,
+      "demand": 1711,
+      "cycle_time": 140,
+      "fare": 0.5
+    },
+    {
+      "label": 40,
+      "number": 13,
+      "length": 49,
+      "demand": 1675,
+      "cycle_time": 180,
+      "fare": 0.6
+    },
+    {
+      "label": 507,
+      "number": 14,
+      "length": 62,
+      "demand": 1569,
+      "cycle_time": 220,
+      "fare": 0.6
+    },
+    {
+      "label": 102,
+      "number": 15,
+      "length": 27,
+      "demand": 1433,
+      "cycle_time": 140,
+      "fare": 0.4
+    },
+    {
+      "label": 41,
+      "number": 16,
+      "length": 47,
+      "demand": 1398,
+      "cycle_time": 160,
+      "fare": 0.6
+    },
+    {
+      "label": 105,
+      "number": 17,
+      "length": 34,
+      "demand": 1295,
+      "cycle_time": 140,
+      "fare": 0.5
+    },
+    {
+      "label": 12,
+      "number": 18,
+      "length": 64,
+      "demand": 1229,
+      "cycle_time": 250,
+      "fare": 0.6
+    },
+    {
+      "label": 11,
+      "number": 19,
+      "length": 42,
+      "demand": 1187,
+      "cycle_time": 180,
+      "fare": 0.6
+    },
+    {
+      "label": 39,
+      "number": 20,
+      "length": 35,
+      "demand": 1150,
+      "cycle_time": 120,
+      "fare": 0.5
+    },
+    {
+      "label": 101,
+      "number": 21,
+      "length": 52,
+      "demand": 1146,
+      "cycle_time": 220,
+      "fare": 0.5
+    },
+    {
+      "label": 34,
+      "number": 22,
+      "length": 68,
+      "demand": 1051,
+      "cycle_time": 240,
+      "fare": 0.6
+    },
+    {
+      "label": 24,
+      "number": 23,
+      "length": 50,
+      "demand": 1010,
+      "cycle_time": 200,
+      "fare": 0.5
+    },
+    {
+      "label": 506,
+      "number": 24,
+      "length": 34,
+      "demand": 967,
+      "cycle_time": 180,
+      "fare": 0.5
+    },
+    {
+      "label": 99,
+      "number": 25,
+      "length": 31,
+      "demand": 943,
+      "cycle_time": 160,
+      "fare": 0.5
+    },
+    {
+      "label": 19,
+      "number": 26,
+      "length": 47,
+      "demand": 925,
+      "cycle_time": 220,
+      "fare": 0.6
+    },
+    {
+      "label": 139,
+      "number": 27,
+      "length": 30,
+      "demand": 826,
+      "cycle_time": 160,
+      "fare": 0.5
+    },
+    {
+      "label": 38,
+      "number": 28,
+      "length": 26,
+      "demand": 808,
+      "cycle_time": 140,
+      "fare": 0.5
+    },
+    {
+      "label": 501,
+      "number": 29,
+      "length": 36,
+      "demand": 763,
+      "cycle_time": 180,
+      "fare": 0.6
+    },
+    {
+      "label": 17,
+      "number": 30,
+      "length": 20,
+      "demand": 708,
+      "cycle_time": 100,
+      "fare": 0.5
+    },
+    {
+      "label": 602,
+      "number": 31,
+      "length": 29,
+      "demand": 645,
+      "cycle_time": 160,
+      "fare": 0.5
+    },
+    {
+      "label": 205,
+      "number": 32,
+      "length": 17,
+      "demand": 324,
+      "cycle_time": 70,
+      "fare": 0.4
+    },
+    {
+      "label": 500,
+      "number": 33,
+      "length": 21,
+      "demand": 267,
+      "cycle_time": 70,
+      "fare": 0.6
+    },
+    {
+      "label": 215,
+      "number": 34,
+      "length": 118,
+      "demand": 231,
+      "cycle_time": 180,
+      "fare": 3
+    },
+    {
+      "label": 21,
+      "number": 35,
+      "length": 57,
+      "demand": 53,
+      "cycle_time": 120,
+      "fare": 2
+    }
+  ],
+  "buses": [
+    {
+      "brand": "Volvo",
+      "capacities": [
+        {
+          "capacity": 40,
+          "available": 7
+        }
+      ],
+      "costs": {
+        "per_ten_years": 91800,
+        "per_year": 9180,
+        "per_km": 0.122
+      }
+    },
+    {
+      "brand": "Mercedes",
+      "capacities": [
+        {
+          "capacity": 40,
+          "available": 17
+        },
+        {
+          "capacity": 46,
+          "available": 141
+        }
+      ],
+      "costs": {
+        "per_ten_years": 90250,
+        "per_year": 9025,
+        "per_km": 0.120
+      }
+    },
+    {
+      "brand": "Daewoo",
+      "capacities": [
+        {
+          "capacity": 30,
+          "available": 232
+        },
+        {
+          "capacity": 40,
+          "available": 65
+        }
+      ],
+      "costs": {
+        "per_ten_years": 117850,
+        "per_year": 11785,
+        "per_km": 0.156
+      }
+    }
+  ]
+}

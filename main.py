@@ -50,6 +50,7 @@ def main():
     
     Min Z = sum((for each route i) (for each bus j) (for each capacity k) c[i][j][k] * Y[i][j][k] * X[i][j][k])
     
+    
     """
     problem += lpSum(
         [[Y[i][j][k] * (20 / routes[i]['cycle_time']) for i in range(len(routes))] for j in range(len(buses)) for k in

@@ -1,0 +1,18 @@
+[[package]]
+name = "pulp"
+version = "2.6.0"
+description = "PuLP is an LP modeler written in python. PuLP can generate MPS or LP files and call GLPK, COIN CLP/CBC, CPLEX, and GUROBI to solve linear problems."
+category = "main"
+optional = false
+python-versions = "*"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.8"
+content-hash = "b21a0b32c839d7a716c397cc36c3a8781700d2e5e5ff51bbc3b557a9421e903b"
+
+[metadata.files]
+pulp = [
+    {file = "PuLP-2.6.0-py3-none-any.whl", hash = "sha256:37ea19fde27c2a767989a40e945d7a44b8c9cf007bd433e2c0a73acbd5e92f0c"},
+    {file = "PuLP-2.6.0.tar.gz", hash = "sha256:4b4f7e1e954453e1b233720be23aea2f10ff068a835ac10c090a93d8e2eb2e8d"},
+]

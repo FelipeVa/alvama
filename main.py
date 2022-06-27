@@ -1,8 +1,9 @@
-from pulp import *
+from pulp import LpProblem, LpMinimize, LpVariable, LpStatus, value, lpSum
+import json
 
 
 def json_loader(file_name):
-    file = f"{file_name}.json"
+    file = f"data/{file_name}.json"
 
     with open(file) as json_file:
         data = json.loads(json_file.read())
@@ -56,7 +57,7 @@ def main():
 
 
     # The problem data is written to an .lp file
-    problem.writeLP("Sudoku.lp")
+    problem.writeLP("alvama.lp")
 
     # The problem is solved using PuLP's choice of Solver
     problem.solve()

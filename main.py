@@ -45,8 +45,21 @@ def main():
 
   
     problem = LpProblem("Minimize_the_number_of_buses", LpMinimize)
+<<<<<<< HEAD
     problem += lpSum([[X[i][j][k] * (20 / routes[i]['cycle_time']) for i in range(len(routes))] for j in range(len(buses)) for k in
          range(len(buses[j]['capacities']))]) + lpSum( 
+=======
+
+    """ Funcion objetivo del modelo
+    Esta funcion es la que se va a minimizar con el objetivo de obtener un numero de buses optimo
+    Ademas de que se va a minimizar el costo total
+    
+    Min Z = sum((for each route i) (for each bus j) (for each capacity k) c[i][j][k] * Y[i][j][k] * X[i][j][k])
+    
+    
+    """
+    problem += lpSum(
+>>>>>>> origin/master
         [[Y[i][j][k] * (20 / routes[i]['cycle_time']) for i in range(len(routes))] for j in range(len(buses)) for k in
          range(len(buses[j]['capacities']))]) + lpSum(
         [[c[i][j][k] * buses[j]['costs']['per_km'] * routes[i]['length'] for i in range(len(routes))] for j in

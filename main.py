@@ -31,17 +31,19 @@ def main():
     total_buses = [i for i in range(len(buses))]
     total_capacities = [i for j in range(len(buses)) for i in range(len(buses[j]['capacities']))]
 
+    X = LpVariable.dicts('Total_bus', (total_routes, total_buses, total_capacities), 0, None, LpInteger)
     Y = LpVariable.dicts('Cycles_per_day', (total_routes, total_buses, total_capacities), 0, None, LpInteger)
     c = LpVariable.dicts('Cycle_cost', (total_routes, total_buses, total_capacities), 0, None, LpInteger)
 
-    print(Y[0][0][0])
-    brands = list(map(lambda x: x['brand'], buses))
-    capacity_per_bus = list(map(lambda x: x['capacities'], buses))
+    # print(Y[0][0][0])
+    # brands = list(map(lambda x: x['brand'], buses))
+    # capacity_per_bus = list(map(lambda x: x['capacities'], buses))
 
     # bus_capacity = makeDict([brands], capacity_per_bus, 0)
 
     # print(bus_capacity)
 
+  
     problem = LpProblem("Minimize_the_number_of_buses", LpMinimize)
 
     """ Funcion objetivo del modelo
@@ -52,17 +54,13 @@ def main():
     
     
     """
-    problem += lpSum(
-        [[Y[i][j][k] * (20 / routes[i]['cycle_time']) for i in range(len(routes))] for j in range(len(buses)) for k in
-         range(len(buses[j]['capacities']))]) + lpSum(
+    problem += lpSum([[X[i][j][k] * (20 / routes[i]['cycle_time']) for i in range(len(routes))] for j in range(len(buses)) for k in
+         range(len(buses[j]['capacities']))]) + lpSum(  + lpSum(
         [[c[i][j][k] * buses[j]['costs']['per_km'] * routes[i]['length'] for i in range(len(routes))] for j in
          range(len(buses)) for k in
          range(len(buses[j]['capacities']))])
 
     # problem += Y[1][1][1] * 20
-    #
-    # for i in range(len(routes)):
-    #     problem += lpSum(routes[i]['cycle_time']) <= 20
 
 
     # The problem data is written to an .lp file
@@ -87,3 +85,6 @@ if __name__ == '__main__':
 
 # Volvo ( j = 1 ); Mercedes ( j = 2 ); Daewoo ( j = 3 );
 # Volvo ( k = 1 ); Mercedes ( k = 1 , k = 2 ); Daewoo ( k = 1, k = 2 );
+# sum{ i, j } Kjk*Yijk*Xijk >= di;  for i
+# sum{ i } Xijk <= Njk; for j, for k
+# 

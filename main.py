@@ -1,4 +1,4 @@
-from pulp import LpProblem, LpMinimize, LpVariable, LpStatus, value, lpSum
+from pulp import LpProblem, LpMinimize, LpVariable, LpStatus, value, lpSum, LpInteger
 import json
 
 

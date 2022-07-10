@@ -10,6 +10,14 @@ def json_loader(file_name):
         return data
 
 
+def get_total_cycles(cycle_time):
+    return round(20 * 60 / cycle_time)
+
+
+def get_cycle_cost(cost_per_km, length):
+    return cost_per_km * length * 2
+
+
 def main():
     # load data from json file
     data = json_loader("data")
@@ -24,14 +32,12 @@ def main():
     total_buses = [i for i in range(len(buses))]
     total_capacities = [i for j in range(len(buses)) for i in range(len(buses[j]['capacities']))]
 
-    print(len(total_routes), len(total_buses), len(total_capacities))
     X = LpVariable.dicts('Total_bus', (total_routes, total_buses, total_capacities), 0, None, LpInteger)
 
     problem = LpProblem("Minimize_the_number_of_buses", LpMinimize)
 
     """ Funcion objetivo del modelo
-    Esta funcion es la que se va a minimizar con el objetivo de obtener un numero de buses optimo
-    Ademas de que se va a minimizar el costo total
+    Tiene como objetivo minimizar los costes totales, ademas de minimizar el numero de buses que se utilizan
     
     Min Z = sum((for each route i) (for each bus j) (for each capacity k) c[i][j][k] * Y[i][j][k] * X[i][j][k])
     
@@ -39,7 +45,11 @@ def main():
     """
 
     # Funcion objetivo X[i][j][k] Y[i][j][k] * c[i][j][k]
-    problem += lpSum([X[i][j][k] * round(20 * 60 / routes[i]['cycle_time']) * (buses[j]['costs']['per_km'] * routes[i]['length'] * 2) for i in range(len(routes)) for j in range(len(buses)) for k in range(len(buses[j]['capacities']))]), 'Numero de buses '
+    problem += lpSum(
+        [X[i][j][k] * get_total_cycles(routes[i]['cycle_time']) * get_cycle_cost(
+                    buses[j]['costs']['per_km'], routes[i]['length'])
+         for i in range(len(routes)) for j in range(len(buses)) for k in
+         range(len(buses[j]['capacities']))]), 'Numero de buses '
 
     # sum{ i } Xijk <= Njk; for j, for k
 
@@ -49,7 +59,9 @@ def main():
 
     # sum{ i, j } Kjk*Yijk*Xijk >= di;  for i
     for i in range(len(routes)):
-        problem += lpSum([buses[j]['capacities'][k]['capacity'] * round(20 * 60 / routes[i]['cycle_time']) * X[i][j][k] for j in range(len(buses)) for k in range(len(buses[j]['capacities']))]) >= routes[i]['demand']
+        problem += lpSum(
+            [buses[j]['capacities'][k]['capacity'] * get_total_cycles(routes[i]['cycle_time']) * X[i][j][k] for j in
+             range(len(buses)) for k in range(len(buses[j]['capacities']))]) >= routes[i]['demand']
 
     # The problem data is written to an .lp file
     problem.writeLP("alvama.lp")

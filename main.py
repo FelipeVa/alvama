@@ -1,4 +1,4 @@
-from pulp import LpProblem, LpMinimize, LpVariable, LpStatus, value, lpSum, LpInteger
+from pulp import LpProblem, LpMinimize, LpVariable, LpStatus, value, lpSum, LpInteger, makeDict
 import json
 
 
@@ -11,11 +11,6 @@ def json_loader(file_name):
 
 
 def main():
-    # alkheder model here
-    total_count_of_paths = 3
-    total_buses_brands_by_manufacturer = 2
-    total_buses_brands_count_by_capacity = 2
-
     # load data from json file
     data = json_loader("data")
 
@@ -25,25 +20,13 @@ def main():
     # Buses information
     buses = data['buses']
 
-    cycles_per_day = [(i, j, k) for i in range(len(routes)) for j in range(len(buses)) for k in
-                      range(len(buses[j]['capacities']))]
     total_routes = [i for i in range(len(routes))]
     total_buses = [i for i in range(len(buses))]
     total_capacities = [i for j in range(len(buses)) for i in range(len(buses[j]['capacities']))]
 
+    print(len(total_routes), len(total_buses), len(total_capacities))
     X = LpVariable.dicts('Total_bus', (total_routes, total_buses, total_capacities), 0, None, LpInteger)
-    Y = LpVariable.dicts('Cycles_per_day', (total_routes, total_buses, total_capacities), 0, None, LpInteger)
-    c = LpVariable.dicts('Cycle_cost', (total_routes, total_buses, total_capacities), 0, None, LpInteger)
 
-    # print(Y[0][0][0])
-    # brands = list(map(lambda x: x['brand'], buses))
-    # capacity_per_bus = list(map(lambda x: x['capacities'], buses))
-
-    # bus_capacity = makeDict([brands], capacity_per_bus, 0)
-
-    # print(bus_capacity)
-
-  
     problem = LpProblem("Minimize_the_number_of_buses", LpMinimize)
 
     """ Funcion objetivo del modelo
@@ -54,14 +37,19 @@ def main():
     
     
     """
-    problem += lpSum([[X[i][j][k] * (20 / routes[i]['cycle_time']) for i in range(len(routes))] for j in range(len(buses)) for k in
-         range(len(buses[j]['capacities']))]) + lpSum(  + lpSum(
-        [[c[i][j][k] * buses[j]['costs']['per_km'] * routes[i]['length'] for i in range(len(routes))] for j in
-         range(len(buses)) for k in
-         range(len(buses[j]['capacities']))])
 
-    # problem += Y[1][1][1] * 20
+    # Funcion objetivo X[i][j][k] Y[i][j][k] * c[i][j][k]
+    problem += lpSum([X[i][j][k] * round(20 * 60 / routes[i]['cycle_time']) * (buses[j]['costs']['per_km'] * routes[i]['length'] * 2) for i in range(len(routes)) for j in range(len(buses)) for k in range(len(buses[j]['capacities']))]), 'Numero de buses '
 
+    # sum{ i } Xijk <= Njk; for j, for k
+
+    for j in range(len(buses)):
+        for k in range(len(buses[j]['capacities'])):
+            problem += lpSum([X[i][j][k] for i in range(len(routes))]) <= buses[j]['capacities'][k]['available']
+
+    # sum{ i, j } Kjk*Yijk*Xijk >= di;  for i
+    for i in range(len(routes)):
+        problem += lpSum([buses[j]['capacities'][k]['capacity'] * round(20 * 60 / routes[i]['cycle_time']) * X[i][j][k] for j in range(len(buses)) for k in range(len(buses[j]['capacities']))]) >= routes[i]['demand']
 
     # The problem data is written to an .lp file
     problem.writeLP("alvama.lp")
@@ -70,8 +58,13 @@ def main():
     problem.solve()
 
     # The status of the solution is printed to the screen
+    sumT = 0
+
     for v in problem.variables():
         print(v.name, "=", v.varValue)
+        sumT += v.varValue
+
+    print("Total: ", sumT)
 
     # Se imprime el status del problema
     print("Status:", LpStatus[problem.status])
@@ -87,4 +80,4 @@ if __name__ == '__main__':
 # Volvo ( k = 1 ); Mercedes ( k = 1 , k = 2 ); Daewoo ( k = 1, k = 2 );
 # sum{ i, j } Kjk*Yijk*Xijk >= di;  for i
 # sum{ i } Xijk <= Njk; for j, for k
-# 
+#

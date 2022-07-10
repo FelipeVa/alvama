@@ -188,7 +188,7 @@
       "label": 506,
       "number": 24,
       "length": 34,
-      "demand": 967,
+      "demand": 957,
       "cycle_time": 180,
       "fare": 0.5
     },
@@ -293,7 +293,7 @@
       "costs": {
         "per_ten_years": 91800,
         "per_year": 9180,
-        "per_km": 0.122
+        "per_km": 0.0683
       }
     },
     {
@@ -301,7 +301,7 @@
       "capacities": [
         {
           "capacity": 40,
-          "available": 17
+          "available": 12
         },
         {
           "capacity": 46,
@@ -311,7 +311,7 @@
       "costs": {
         "per_ten_years": 90250,
         "per_year": 9025,
-        "per_km": 0.120
+        "per_km": 0.0672
       }
     },
     {
@@ -329,7 +329,7 @@
       "costs": {
         "per_ten_years": 117850,
         "per_year": 11785,
-        "per_km": 0.156
+        "per_km": 0.0877
       }
     }
   ]

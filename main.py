@@ -1,4 +1,5 @@
-from pulp import LpProblem, LpMinimize, LpVariable, LpStatus, value, lpSum, LpInteger, makeDict
+from pulp import LpProblem, LpMinimize, LpVariable, LpStatus, value, lpSum, LpInteger, makeDict, LpContinuous
+from pandas import DataFrame
 import json
 
 
@@ -16,6 +17,10 @@ def get_total_cycles(cycle_time):
 
 def get_cycle_cost(cost_per_km, length):
     return cost_per_km * length * 2
+
+
+def get_total_cost_bus_per_day(cost_per_km, length, cycle_cost):
+    return get_total_cycles(cycle_cost) * get_cycle_cost(cost_per_km, length)
 
 
 def main():
@@ -46,8 +51,7 @@ def main():
 
     # Funcion objetivo X[i][j][k] Y[i][j][k] * c[i][j][k]
     problem += lpSum(
-        [X[i][j][k] * get_total_cycles(routes[i]['cycle_time']) * get_cycle_cost(
-                    buses[j]['costs']['per_km'], routes[i]['length'])
+        [X[i][j][k] * get_total_cost_bus_per_day(buses[j]['costs']['per_km'], routes[i]['length'], routes[i]['cycle_time'])
          for i in range(len(routes)) for j in range(len(buses)) for k in
          range(len(buses[j]['capacities']))]), 'Numero de buses '
 
@@ -70,14 +74,26 @@ def main():
     problem.solve()
 
     # The status of the solution is printed to the screen
-    sumT = 0
+    buses_count = 0
+    buses_group = []
 
     for v in problem.variables():
-        print(v.name, "=", v.varValue)
-        sumT += v.varValue
+        bus_group_split = v.name.split('_')
 
-    print("Total: ", sumT)
+        if v.varValue != 0:
+            buses_group.append({
+                'route': int(bus_group_split[2]) + 1,
+                'type': int(bus_group_split[3]) + 1,
+                'capacity': int(bus_group_split[4]) + 1,
+                'amount': v.varValue
+            })
 
+        buses_count += v.varValue
+
+    buses_data_frame = DataFrame(data=buses_group).set_index('route')
+    # buses_data_frame['sum'] = buses_data_frame[['A', 'B', 'C']].sum(axis=1)
+    print("Total buses to be used: ", buses_count)
+    print("Buses group: \n", buses_data_frame.sort_values(by='route'))
     # Se imprime el status del problema
     print("Status:", LpStatus[problem.status])
 

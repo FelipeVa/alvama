@@ -1,0 +1,259 @@
+{
+  "routes": [
+    {
+      "name": 21,
+      "length": 19,
+      "demand": 3480,
+      "cycle_time": 90
+    },
+    {
+      "name": 16,
+      "length": 22,
+      "demand": 3352,
+      "cycle_time": 120
+    },
+    {
+      "name": 51,
+      "length": 35,
+      "demand": 3279,
+      "cycle_time": 180
+    },
+    {
+      "name": 13,
+      "length": 21,
+      "demand": 2955,
+      "cycle_time": 100
+    },
+    {
+      "name": 66,
+      "length": 22,
+      "demand": 2750,
+      "cycle_time": 120
+    },
+    {
+      "name": 106,
+      "length": 34,
+      "demand": 2705,
+      "cycle_time": 180
+    },
+    {
+      "name": 15,
+      "length": 57,
+      "demand": 2564,
+      "cycle_time": 200
+    },
+    {
+      "name": 999,
+      "length": 18,
+      "demand": 2211,
+      "cycle_time": 90
+    },
+    {
+      "name": 103,
+      "length": 54,
+      "demand": 2041,
+      "cycle_time": 220
+    },
+    {
+      "name": 23,
+      "length": 44,
+      "demand": 1992,
+      "cycle_time": 150
+    },
+    {
+      "name": 18,
+      "length": 31,
+      "demand": 1920,
+      "cycle_time": 120
+    },
+    {
+      "name": 1022,
+      "length": 28,
+      "demand": 1711,
+      "cycle_time": 140
+    },
+    {
+      "name": 40,
+      "length": 49,
+      "demand": 1675,
+      "cycle_time": 180
+    },
+    {
+      "name": 507,
+      "length": 62,
+      "demand": 1569,
+      "cycle_time": 220
+    },
+    {
+      "name": 102,
+      "length": 27,
+      "demand": 1433,
+      "cycle_time": 140
+    },
+    {
+      "name": 41,
+      "length": 47,
+      "demand": 1398,
+      "cycle_time": 160
+    },
+    {
+      "name": 105,
+      "length": 34,
+      "demand": 1295,
+      "cycle_time": 140
+    },
+    {
+      "name": 12,
+      "length": 64,
+      "demand": 1229,
+      "cycle_time": 250
+    },
+    {
+      "name": 11,
+      "length": 42,
+      "demand": 1187,
+      "cycle_time": 180
+    },
+    {
+      "name": 39,
+      "length": 35,
+      "demand": 1150,
+      "cycle_time": 120
+    },
+    {
+      "name": 101,
+      "length": 52,
+      "demand": 1146,
+      "cycle_time": 220
+    },
+    {
+      "name": 34,
+      "length": 68,
+      "demand": 1051,
+      "cycle_time": 240
+    },
+    {
+      "name": 24,
+      "length": 50,
+      "demand": 1010,
+      "cycle_time": 200
+    },
+    {
+      "name": 506,
+      "length": 34,
+      "demand": 957,
+      "cycle_time": 180
+    },
+    {
+      "name": 99,
+      "length": 31,
+      "demand": 943,
+      "cycle_time": 160
+    },
+    {
+      "name": 19,
+      "length": 47,
+      "demand": 925,
+      "cycle_time": 220
+    },
+    {
+      "name": 139,
+      "length": 30,
+      "demand": 826,
+      "cycle_time": 160
+    },
+    {
+      "name": 38,
+      "length": 26,
+      "demand": 808,
+      "cycle_time": 140
+    },
+    {
+      "name": 501,
+      "length": 36,
+      "demand": 763,
+      "cycle_time": 180
+    },
+    {
+      "name": 17,
+      "length": 20,
+      "demand": 708,
+      "cycle_time": 100
+    },
+    {
+      "name": 602,
+      "length": 29,
+      "demand": 645,
+      "cycle_time": 160
+    },
+    {
+      "name": 205,
+      "length": 17,
+      "demand": 324,
+      "cycle_time": 70
+    },
+    {
+      "name": 500,
+      "length": 21,
+      "demand": 267,
+      "cycle_time": 70
+    },
+    {
+      "name": 215,
+      "length": 118,
+      "demand": 231,
+      "cycle_time": 180
+    },
+    {
+      "name": 21,
+      "length": 57,
+      "demand": 53,
+      "cycle_time": 120
+    }
+  ],
+  "buses": [
+    {
+      "name": "Volvo",
+      "capacities": [
+        {
+          "name": "Big",
+          "capacity": 40,
+          "available": 7
+        }
+      ],
+      "cost_per_km": 0.0683
+    },
+    {
+      "name": "Mercedes",
+      "capacities": [
+        {
+          "name": "Mid-Big",
+          "capacity": 40,
+          "available": 12
+        },
+        {
+          "name": "Big",
+          "capacity": 46,
+          "available": 141
+        }
+      ],
+      "cost_per_km": 0.0672
+    },
+    {
+      "name": "Daewoo",
+      "capacities": [
+        {
+          "name": "Medium",
+          "capacity": 30,
+          "available": 232
+        },
+        {
+          "name": "Big",
+          "capacity": 40,
+          "available": 65
+        }
+      ],
+      "cost_per_km": 0.0877
+    }
+  ]
+}

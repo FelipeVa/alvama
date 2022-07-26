@@ -9,7 +9,7 @@ class SimpleExponentialSmoothing(ForecastInterface):
     next_period_forecast = 0
     values = []
 
-    def __init__(self, data, smoothing_level=0.5, forecast_period=1, optimized=False):
+    def __init__(self, data, forecast_period=1, smoothing_level=None, optimized=True):
         self.data = data
         self.smoothing_level = smoothing_level
         self.forecast_period = forecast_period
@@ -38,3 +38,11 @@ class SimpleExponentialSmoothing(ForecastInterface):
 
     def get_data(self):
         return self.data
+
+    def to_dict(self):
+        return {
+            'name': 'Simple Exponential Smoothing',
+            'mean_squared_error': self.get_mean_squared_error(),
+            'next_period_forecast': self.get_next_period_forecast(),
+            'values': self.get_values()
+        }

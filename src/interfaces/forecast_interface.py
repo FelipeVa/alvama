@@ -13,3 +13,6 @@ class ForecastInterface:
 
     def get_data(self) -> list:
         raise NotImplementedError
+
+    def to_dict(self) -> dict:
+        raise NotImplementedError

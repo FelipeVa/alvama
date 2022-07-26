@@ -1,7 +1,6 @@
 import pandas as pd
-import numpy as np
-from src.interfaces.forecast_interface import ForecastInterface
 from sklearn.metrics import mean_squared_error
+from src.interfaces.forecast_interface import ForecastInterface
 
 
 class MovingAverage(ForecastInterface):
@@ -9,16 +8,18 @@ class MovingAverage(ForecastInterface):
     next_period_forecast = 0
     values = []
 
-    def __init__(self, data, window_size=3):
+    def __init__(self, data, window_size=3, forecast_period=1):
         self.data = data
         self.window_size = window_size
+        self.forecast_period = forecast_period
 
     def solve(self):
         data = self.data
         window_size = self.window_size
 
         # Create a new entry to calculate the forecast for n + 1 period
-        data.append(0)
+        for i in range(self.forecast_period):
+            data.append(0)
 
         # Convert array of integers to pandas series
         numbers_series = pd.Series(data)
@@ -47,3 +48,11 @@ class MovingAverage(ForecastInterface):
 
     def get_data(self):
         return self.data
+
+    def to_dict(self):
+        return {
+            'name': 'Moving Average',
+            'mean_squared_error': self.get_mean_squared_error(),
+            'next_period_forecast': self.get_next_period_forecast(),
+            'values': self.get_values()
+        }

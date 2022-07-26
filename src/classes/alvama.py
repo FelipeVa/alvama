@@ -1,9 +1,11 @@
 from pulp import LpProblem, LpMinimize, LpVariable, lpSum, LpInteger, PULP_CBC_CMD, LpStatus, value
 from src.helpers import get_total_cycles, get_total_cost_bus_per_day
+import time
 
 
 class Alvama:
     problem: LpProblem = {}
+    time = 0.0
 
     def __init__(self, data):
         self.data = data
@@ -55,7 +57,9 @@ class Alvama:
         return self
 
     def solve(self, message=False):
+        self.time = time.time()
         self.problem.solve(PULP_CBC_CMD(msg=message))
+        self.time = time.time() - self.time
 
         return self
 
@@ -73,3 +77,30 @@ class Alvama:
 
     def get_problem(self):
         return self.problem
+
+    def to_json(self):
+        buses_group = []
+
+        for variable in self.get_variables():
+            if variable.varValue != 0:
+                variable_value = variable.varValue
+                bus_group_split = variable.name.split('_')
+                route = self.routes[int(bus_group_split[1])]
+                bus = self.buses[int(bus_group_split[2])]
+                capacity = bus['capacities'][int(bus_group_split[3])]
+
+                # This format is for the alvama server.
+                # So we just return resources id's
+                buses_group.append({
+                    'route_id': route['id'] if 'id' in route else route['name'],
+                    'bus_id': bus['id'] if 'id' in bus else bus['name'],
+                    'capacity_id': capacity['id'] if 'id' in capacity else capacity['name'],
+                    'amount': int(variable_value),
+                })
+
+        return {
+            'status': self.get_status(),
+            'objective': round(self.get_objective(), 2),
+            'time': round(self.time, 4),
+            'results': buses_group
+        }

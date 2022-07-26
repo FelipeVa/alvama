@@ -9,7 +9,7 @@ class Holt(ForecastInterface):
     next_period_forecast = 0
     values = []
 
-    def __init__(self, data, smoothing_level=0.5, smoothing_trend=0.2, forecast_period=1, optimized=False):
+    def __init__(self, data, smoothing_level=None, smoothing_trend=None, forecast_period=1, optimized=True):
         self.data = data
         self.smoothing_level = smoothing_level
         self.forecast_period = forecast_period
@@ -38,3 +38,11 @@ class Holt(ForecastInterface):
 
     def get_data(self):
         return self.data
+
+    def to_dict(self):
+        return {
+            'name': 'Holt',
+            'mean_squared_error': self.get_mean_squared_error(),
+            'next_period_forecast': self.get_next_period_forecast(),
+            'values': self.get_values()
+        }

@@ -15,9 +15,10 @@ def main(tool: str, payload: str):
         response = alvama.to_json()
 
     elif tool == 'forecast':
-        moving_average = MovingAverage(json.loads(payload)).solve()
-        simple_exponential_smoothing = SimpleExponentialSmoothing(json.loads(payload)).solve()
-        holt = Holt(json.loads(payload)).solve()
+        data = list(map(lambda x: x['value'], json.loads(payload)['items']))
+        moving_average = MovingAverage(data).solve()
+        simple_exponential_smoothing = SimpleExponentialSmoothing(data).solve()
+        holt = Holt(data).solve()
 
         forecasts = {
             'holt': holt.to_dict(),

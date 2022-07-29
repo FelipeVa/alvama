@@ -41,8 +41,8 @@ class SimpleExponentialSmoothing(ForecastInterface):
 
     def to_dict(self):
         return {
-            'name': 'Simple Exponential Smoothing',
-            'mean_squared_error': self.get_mean_squared_error(),
+            'method': 'Simple Exponential Smoothing',
+            'mean_squared_error': round(self.get_mean_squared_error(), 4),
             'next_period_forecast': self.get_next_period_forecast(),
             'values': self.get_values()
         }

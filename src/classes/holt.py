@@ -41,8 +41,8 @@ class Holt(ForecastInterface):
 
     def to_dict(self):
         return {
-            'name': 'Holt',
-            'mean_squared_error': self.get_mean_squared_error(),
+            'method': 'Holt',
+            'mean_squared_error': round(self.get_mean_squared_error(), 4),
             'next_period_forecast': self.get_next_period_forecast(),
             'values': self.get_values()
         }

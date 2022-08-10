@@ -21,9 +21,7 @@ def main():
                                                  265.719,
                                                  135.037], smoothing_level=None, optimized=True).solve()
 
-    print('MSE', moving_average.get_mean_squared_error())
-    print('Forecast', moving_average.get_next_period_forecast())
-    print('Values', moving_average.get_values())
+    print(moving_average.to_dict())
 
 
 if __name__ == '__main__':

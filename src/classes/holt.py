@@ -43,6 +43,6 @@ class Holt(ForecastInterface):
         return {
             'method': 'Holt',
             'mean_squared_error': round(self.get_mean_squared_error(), 4),
-            'next_period_forecast': self.get_next_period_forecast(),
+            'next_period_forecast': round(self.get_next_period_forecast()),
             'values': self.get_values()
         }

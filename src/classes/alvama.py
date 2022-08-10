@@ -54,6 +54,11 @@ class Alvama:
                  range(len(self.buses)) for k in range(len(self.buses[j]['capacities']))]) >= int(
                 self.routes[i]['demand'])
 
+        for i in range(len(self.routes)):
+            for j in range(len(self.buses)):
+                for k in range(len(self.buses[j]['capacities'])):
+                    self.problem += x[i][j][k] >= 0
+
         return self
 
     def solve(self, message=False):
@@ -100,7 +105,7 @@ class Alvama:
 
         return {
             'status': self.get_status(),
-            'objective': round(self.get_objective(), 2),
+            'objective': round(self.get_objective(), 2) / 2,
             'time': round(self.time, 4),
             'results': buses_group
         }

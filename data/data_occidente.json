@@ -1,0 +1,50 @@
+{
+  "routes": [
+    {
+      "name": "Roldanillo - Cali",
+      "length": 130,
+      "demand": 0,
+      "cycle_time": 480
+    }
+  ],
+  "buses": [
+    {
+      "name": "Mercedez Benz",
+      "capacities": [
+        {
+          "name": "Grande",
+          "capacity": 19,
+          "available": 26
+        },
+        {
+          "name": "Pequeño",
+          "capacity": 17,
+          "available": 1
+        }
+      ],
+      "cost_per_km": 1676.13
+    },
+    {
+      "name": "Volkswagen",
+      "capacities": [
+        {
+          "name": "Grande",
+          "capacity": 19,
+          "available": 1
+        }
+      ],
+      "cost_per_km": 1676.13
+    },
+    {
+      "name": "Nissan",
+      "capacities": [
+        {
+          "name": "Grande",
+          "capacity": 19,
+          "available": 1
+        }
+      ],
+      "cost_per_km": 1676.13
+    }
+  ]
+}

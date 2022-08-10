@@ -12,12 +12,16 @@ def json_loader(file_name):
 
 
 def get_total_cycles(cycle_time):
-    return round(20 * 60 / int(cycle_time))
+    return round((8 * 60) / int(cycle_time))
 
 
 def get_cycle_cost(cost_per_km, length):
     return float(cost_per_km) * float(length) * 2
 
 
-def get_total_cost_bus_per_day(cost_per_km, length, cycle_cost):
-    return get_total_cycles(cycle_cost) * get_cycle_cost(cost_per_km, length)
+def get_total_cost_bus_per_day(cost_per_km, length, cycle_time):
+    return get_total_cycles(cycle_time) * get_cycle_cost(cost_per_km, length)
+
+
+def map_dict(dictionary, f):
+    return {k: f(v) for k, v in dictionary.items()}

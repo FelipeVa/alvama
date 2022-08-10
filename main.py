@@ -4,6 +4,7 @@ from src.classes.alvama import Alvama
 from src.classes.holt import Holt
 from src.classes.moving_average import MovingAverage
 from src.classes.simple_exponential_smoothing import SimpleExponentialSmoothing
+from src.helpers import map_dict
 import time
 
 
@@ -28,10 +29,11 @@ def main(tool: str, payload: str):
 
         mean_squared_errors_values = list(map(lambda x: x['mean_squared_error'], forecasts.values()))
         mean_squared_errors_keys = list(forecasts.keys())
+        min_mean_squared_key = mean_squared_errors_keys[mean_squared_errors_values.index(min(mean_squared_errors_values))]
 
-        min_mean_squared = mean_squared_errors_keys[mean_squared_errors_values.index(min(mean_squared_errors_values))]
-
-        response = forecasts[min_mean_squared]
+        response = {
+            'forecasts': list(map_dict(forecasts, lambda x: x | {'selected': x['method'] == forecasts[min_mean_squared_key]['method']}).values()),
+        }
 
     else:
         raise f"Unknown tool: {tool}"

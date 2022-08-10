@@ -14,26 +14,35 @@ class MovingAverage(ForecastInterface):
         self.forecast_period = forecast_period
 
     def solve(self):
-        data = self.data
-        window_size = self.window_size
+        last_mean_squared_error = None
+        range_value = 13 if len(self.data) > 12 else 1
 
-        # Create a new entry to calculate the forecast for n + 1 period
-        for i in range(self.forecast_period):
-            data.append(0)
+        for i in range(1, range_value, 1):
+            data = self.data.copy()
 
-        # Convert array of integers to pandas series
-        numbers_series = pd.Series(data)
+            # Create a new entry to calculate the forecast for n + 1 period
+            for j in range(self.forecast_period):
+                data.append(0)
 
-        # Get the window of series
-        # of observations of specified window size
-        moving_averages = numbers_series.rolling(window_size).mean().shift(1)
+            # Convert array of integers to pandas series
+            numbers_series = pd.Series(data)
 
-        # Convert pandas series back to list
-        self.values = moving_averages.dropna().tolist()
+            # Get the window of series
+            # of observations of specified window size
+            moving_averages = numbers_series.rolling(i).mean().shift(1)
+            values = moving_averages.dropna().tolist()
 
-        # Remove null entries from the list
-        self.mean_squared_error = mean_squared_error(data[window_size:-1], self.values[:-1])
-        self.next_period_forecast = self.values[-1]
+            # Calculate the mean squared error
+            if last_mean_squared_error is None:
+                self.values = moving_averages.dropna().tolist()
+                self.mean_squared_error = mean_squared_error(data[i:-1], self.values[:-1])
+                self.next_period_forecast = self.values[-1]
+                last_mean_squared_error = self.mean_squared_error
+            elif mean_squared_error(data[i:-1], values[:-1]) < last_mean_squared_error:
+                self.values = moving_averages.dropna().tolist()
+                self.mean_squared_error = mean_squared_error(data[i:-1], self.values[:-1])
+                self.next_period_forecast = self.values[-1]
+                last_mean_squared_error = self.mean_squared_error
 
         return self
 
@@ -53,6 +62,6 @@ class MovingAverage(ForecastInterface):
         return {
             'method': 'Moving Average',
             'mean_squared_error': round(self.get_mean_squared_error(), 4),
-            'next_period_forecast': self.get_next_period_forecast(),
+            'next_period_forecast': round(self.get_next_period_forecast()),
             'values': self.get_values()
         }
